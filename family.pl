@@ -63,6 +63,11 @@ daughter_of(D, X) :-
   female(D),
   child_of(D, X).
 
+married_to(X, Y) :-
+  child_of(C, X),
+  child_of(C, Y),
+  X \= Y.
+
 uncle_of(Unc, X) :-
   male(Unc),
   child_of(X, P),
@@ -70,9 +75,16 @@ uncle_of(Unc, X) :-
   child_of(Unc, GP),
   P \= Unc.
 
+uncle_of(Unc, X) :-
+  male(Unc),
+  child_of(X, P),
+  child_of(P, GP),
+  child_of(S, GP),
+  married_to(Unc, S),
+  P \= S.
+
 niece_of(N, X) :-
-  female(N),
-  child_of(N, P),
+  daughter_of(N, P),
   child_of(P, GP),
   child_of(X, GP),
   P \= X.
