@@ -56,17 +56,23 @@ mother_of(M, X) :-
   child_of(X, M).
 
 grandparent_of(GP, X) :-
-  child_of(X, Y),
-  child_of(Y, GP).
+  child_of(X, P),
+  child_of(P, GP).
 
 daughter_of(D, X) :-
   female(D),
   child_of(D, X).
 
+% Assumes married couples have children
 married_to(X, Y) :-
   child_of(C, X),
   child_of(C, Y),
   X \= Y.
+
+sibling_of(S, X) :-
+  child_of(S, P),
+  child_of(X, P),
+  S \= X.
 
 uncle_of(Unc, X) :-
   male(Unc),
