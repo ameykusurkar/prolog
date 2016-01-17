@@ -94,4 +94,15 @@ niece_of(N, X) :-
   sibling_of(S, P),
   married_to(X, S).
 
+great_grandfather_of(Gfx, X) :-
+  child_of(X, P),
+  grandparent_of(Gfx, P).
+
+ancestor_of(Anc, X) :-
+  child_of(X, Anc).
+
+ancestor_of(Anc, X) :-
+  child_of(X, P),
+  ancestor_of(Anc, P).
+
 % end of data
