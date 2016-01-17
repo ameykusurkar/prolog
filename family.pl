@@ -77,22 +77,21 @@ sibling_of(S, X) :-
 uncle_of(Unc, X) :-
   male(Unc),
   child_of(X, P),
-  child_of(P, GP),
-  child_of(Unc, GP),
-  P \= Unc.
+  sibling_of(Unc, P).
 
 uncle_of(Unc, X) :-
   male(Unc),
   child_of(X, P),
-  child_of(P, GP),
-  child_of(S, GP),
-  married_to(Unc, S),
-  P \= S.
+  sibling_of(S, P),
+  married_to(Unc, S).
 
 niece_of(N, X) :-
   daughter_of(N, P),
-  child_of(P, GP),
-  child_of(X, GP),
-  P \= X.
+  sibling_of(X, P).
+
+niece_of(N, X) :-
+  daughter_of(N, P),
+  sibling_of(S, P),
+  married_to(X, S).
 
 % end of data
